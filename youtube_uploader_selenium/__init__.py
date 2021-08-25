@@ -29,7 +29,7 @@ class YouTubeUploader:
         self.thumbnail_path = thumbnail_path
         self.metadata_dict = load_metadata(metadata_json_path)
         current_working_dir = str(Path.cwd())
-        self.browser = Firefox(current_working_dir, current_working_dir)
+        self.browser = Firefox(current_working_dir, current_working_dir, None, None, False, False, False)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         self.__validate_inputs()
@@ -93,30 +93,33 @@ class YouTubeUploader:
         title_field = self.browser.find(By.ID, Constant.TEXTBOX, timeout=10)
         self.__write_in_field(title_field, self.metadata_dict[Constant.VIDEO_TITLE], select_all=True)
         self.logger.debug('The video title was set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_TITLE]))
+        
+#        self.browser.find(By.XPATH, Constant.PLAYLIST_ELEMENT).click()
+#        self.logger.debug('Clicked playlists')
 
-        video_description = self.metadata_dict[Constant.VIDEO_DESCRIPTION]
-        if video_description:
-            description_container = self.browser.find(By.XPATH,
-                                                      Constant.DESCRIPTION_CONTAINER)
-            description_field = self.browser.find(By.ID, Constant.TEXTBOX, element=description_container)
-            self.__write_in_field(description_field, self.metadata_dict[Constant.VIDEO_DESCRIPTION])
-            self.logger.debug(
-                'The video description was set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_DESCRIPTION]))
+#        video_description = self.metadata_dict[Constant.VIDEO_DESCRIPTION]
+#        if video_description:
+#            description_container = self.browser.find(By.XPATH,
+#                                                      Constant.DESCRIPTION_CONTAINER)
+#            description_field = self.browser.find(By.ID, Constant.TEXTBOX, element=description_container)
+#            self.__write_in_field(description_field, self.metadata_dict[Constant.VIDEO_DESCRIPTION])
+#            self.logger.debug(
+#                'The video description was set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_DESCRIPTION]))
 
         kids_section = self.browser.find(By.NAME, Constant.NOT_MADE_FOR_KIDS_LABEL)
         self.browser.find(By.ID, Constant.RADIO_LABEL, kids_section).click()
         self.logger.debug('Selected \"{}\"'.format(Constant.NOT_MADE_FOR_KIDS_LABEL))
 
         # Advanced options
-        self.browser.find(By.XPATH, Constant.MORE_BUTTON).click()
-        self.logger.debug('Clicked MORE OPTIONS')
+#        self.browser.find(By.XPATH, Constant.MORE_BUTTON).click()
+#        self.logger.debug('Clicked MORE OPTIONS')
 
-        tags_container = self.browser.find(By.XPATH,
-                                                    Constant.TAGS_INPUT_CONTAINER)
-        tags_field = self.browser.find(By.ID, Constant.TAGS_INPUT, element=tags_container)
-        self.__write_in_field(tags_field, ','.join(self.metadata_dict[Constant.VIDEO_TAGS]))
-        self.logger.debug(
-            'The tags were set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_TAGS]))
+#        tags_container = self.browser.find(By.XPATH,
+#                                                    Constant.TAGS_INPUT_CONTAINER)
+#        tags_field = self.browser.find(By.ID, Constant.TAGS_INPUT, element=tags_container)
+#        self.__write_in_field(tags_field, ','.join(self.metadata_dict[Constant.VIDEO_TAGS]))
+#        self.logger.debug(
+#            'The tags were set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_TAGS]))
 
         self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
         self.logger.debug('Clicked {} one'.format(Constant.NEXT_BUTTON))

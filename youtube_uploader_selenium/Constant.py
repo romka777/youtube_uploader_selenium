@@ -23,9 +23,13 @@ class Constant:
     VIDEO_URL_CONTAINER = "//span[@class='video-url-fadeable style-scope ytcp-video-info']"
     VIDEO_URL_ELEMENT = "//a[@class='style-scope ytcp-video-info']"
     HREF = 'href'
-    UPLOADED = 'Uploading'
+    UPLOADED = 'Загружено'
     ERROR_CONTAINER = '//*[@id="error-message"]'
     VIDEO_NOT_FOUND_ERROR = 'Could not find video_id'
     DONE_BUTTON = 'done-button'
     INPUT_FILE_VIDEO = "//input[@type='file']"
     INPUT_FILE_THUMBNAIL = "//input[@id='file-loader']"
+    
+    PLAYLIST_ELEMENT = '//*[@id="basics"]/div[4]/div[3]/div[1]/ytcp-video-metadata-playlists'
+    PLAYLISTS_CONTAINER_ID = 'items'
+    

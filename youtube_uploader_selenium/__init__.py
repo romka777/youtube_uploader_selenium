@@ -123,21 +123,28 @@ class YouTubeUploader:
 
         self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
         self.logger.debug('Clicked {} one'.format(Constant.NEXT_BUTTON))
+        time.sleep(Constant.USER_WAITING_TIME)
 
         self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
         self.logger.debug('Clicked {} two'.format(Constant.NEXT_BUTTON))
+        time.sleep(Constant.USER_WAITING_TIME)
 
         self.browser.find(By.ID, Constant.NEXT_BUTTON).click()
         self.logger.debug('Clicked {} three'.format(Constant.NEXT_BUTTON))
+        time.sleep(Constant.USER_WAITING_TIME)
 
         public_main_button = self.browser.find(By.NAME, Constant.PUBLIC_BUTTON)
         self.browser.find(By.ID, Constant.RADIO_LABEL, public_main_button).click()
         self.logger.debug('Made the video {}'.format(Constant.PUBLIC_BUTTON))
 
-        video_id = self.__get_video_id()
+        time.sleep(Constant.USER_WAITING_TIME)
+        time.sleep(Constant.USER_WAITING_TIME)
+        time.sleep(Constant.USER_WAITING_TIME)
 
-        status_container = self.browser.find(By.XPATH,
-                                             Constant.STATUS_CONTAINER)
+        video_id = self.__get_video_id()
+        self.logger.debug('Video ID: {}'.format(video_id))
+
+        status_container = self.browser.find(By.XPATH, Constant.STATUS_CONTAINER)
         while True:
             in_process = status_container.text.find(Constant.UPLOADED) != -1
             if in_process:
@@ -146,13 +153,16 @@ class YouTubeUploader:
                 break
 
         done_button = self.browser.find(By.ID, Constant.DONE_BUTTON)
+        self.logger.debug('Done button: {}'.format(Constant.NEXT_BUTTON))
+        time.sleep(Constant.USER_WAITING_TIME)
+        time.sleep(Constant.USER_WAITING_TIME)
 
         # Catch such error as
         # "File is a duplicate of a video you have already uploaded"
         if done_button.get_attribute('aria-disabled') == 'true':
-            error_message = self.browser.find(By.XPATH,
-                                              Constant.ERROR_CONTAINER).text
+            error_message = self.browser.find(By.XPATH, Constant.ERROR_CONTAINER).text
             self.logger.error(error_message)
+            self.logger.error('Disabled public?')
             return False, None
 
         done_button.click()

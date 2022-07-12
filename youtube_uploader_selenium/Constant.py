@@ -1,7 +1,7 @@
 class Constant:
     """A class for storing constants for YoutubeUploader class"""
     YOUTUBE_URL = 'https://www.youtube.com'
-    YOUTUBE_STUDIO_URL = 'https://studio.youtube.com'
+    YOUTUBE_STUDIO_URL = 'https://studio.youtube.com/channel/UCdBHymtuJPMhRZh2MPa7ROQ'
     YOUTUBE_UPLOAD_URL = 'https://www.youtube.com/upload'
     USER_WAITING_TIME = 1
     VIDEO_TITLE = 'title'

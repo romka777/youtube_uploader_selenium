@@ -75,7 +75,7 @@ class YouTubeUploader:
         field.send_keys(string)
 
     def __upload(self) -> (bool, Optional[str]):
-        self.browser.get(Constant.YOUTUBE_URL)
+        self.browser.get(Constant.YOUTUBE_STUDIO_URL)
         time.sleep(Constant.USER_WAITING_TIME)
         self.browser.get(Constant.YOUTUBE_UPLOAD_URL)
         time.sleep(Constant.USER_WAITING_TIME)
@@ -93,7 +93,8 @@ class YouTubeUploader:
         title_field = self.browser.find(By.ID, Constant.TEXTBOX, timeout=10)
         self.__write_in_field(title_field, self.metadata_dict[Constant.VIDEO_TITLE], select_all=True)
         self.logger.debug('The video title was set to \"{}\"'.format(self.metadata_dict[Constant.VIDEO_TITLE]))
-        
+        time.sleep(Constant.USER_WAITING_TIME)
+
 #        self.browser.find(By.XPATH, Constant.PLAYLIST_ELEMENT).click()
 #        self.logger.debug('Clicked playlists')
 
